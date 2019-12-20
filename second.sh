@@ -11,10 +11,12 @@ grub-mkconfig -o /boot/grub/grub.cfg
 grub-install $MY_DISK
 ls -l /boot/efi/EFI/arch/
 
+###### SUDO
 useradd -G wheel -s /bin/bash -m -c $MY_NAME $MY_USER
-pacman -S sudo vim
+pacman -S sudo vim --noconfirm
 echo -e "\n%wheel ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
+###### BASIC
 pacman -S gnome-desktop gnome-control-center xfce4-terminal gdm networkmanager python3 nautilus chromium git --noconfirm --needed
 systemctl enable gdm NetworkManager.service
 

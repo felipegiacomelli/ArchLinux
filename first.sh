@@ -9,6 +9,6 @@ pacstrap /mnt base linux linux-firmware
 
 ###### MOUNT
 mkdir -p /mnt/boot/efi
-gdisk -l /dev/sda
 mount $MY_EFI /mnt/boot/efi
 genfstab -p /mnt >> /mnt/etc/fstab
+cat /mnt/etc/fstab
