@@ -18,3 +18,5 @@ cat /mnt/etc/fstab
 wget https://raw.githubusercontent.com/felipegiacomelli/ArchLinux/master/second.sh
 chmod +x second.sh
 mv second.sh /mnt
+
+echo -e "\narch-chroot /mnt"

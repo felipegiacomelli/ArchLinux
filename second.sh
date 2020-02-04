@@ -4,11 +4,6 @@ MY_NAME="Felipe Giacomelli"
 
 set -e
 
-arch-chroot /mnt
-
-###### mkinitcpio
-# mkinitcpio -p linux
-
 ###### GRUB
 pacman -Syu intel-ucode grub efibootmgr --noconfirm --needed
 mkdir /boot/grub
