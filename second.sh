@@ -2,17 +2,21 @@ MY_DISK="/dev/nvme0n1"
 MY_USER="felipe"
 MY_NAME="Felipe Giacomelli"
 
+set -e
+
+arch-chroot /mnt
+
 ###### mkinitcpio
-mkinitcpio -p linux
+# mkinitcpio -p linux
 
 ###### GRUB
-pacman -Syu intel-ucode grub efibootmgr --noconfirm
+pacman -Syu intel-ucode grub efibootmgr --noconfirm --needed
 grub-mkconfig -o /boot/grub/grub.cfg
 grub-install $MY_DISK
 ls -l /boot/efi/EFI/arch/
 
 ###### SUDO
-useradd -G wheel -s /bin/bash -m -c $MY_NAME $MY_USER
+useradd -G wheel -s /bin/bash -m -c $MY_NAME "$MY_USER"
 pacman -S sudo vim --noconfirm
 echo -e "\n%wheel ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
@@ -31,7 +35,12 @@ touch /etc/locale.conf
 echo -e "LANG=en_GB.UTF-8" >> /etc/locale.conf
 
 ###### USER
+echo -e "\n$MY_USER password: "
 passwd $MY_USER
 
 ###### ROOT
+echo -e "\nroot password: "
 passwd
+
+exit
+umount -R /mnt
