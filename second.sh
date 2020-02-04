@@ -11,12 +11,13 @@ arch-chroot /mnt
 
 ###### GRUB
 pacman -Syu intel-ucode grub efibootmgr --noconfirm --needed
+mkdir /boot/grub
 grub-mkconfig -o /boot/grub/grub.cfg
 grub-install $MY_DISK
 ls -l /boot/efi/EFI/arch/
 
 ###### SUDO
-useradd -G wheel -s /bin/bash -m -c $MY_NAME "$MY_USER"
+useradd -G wheel -s /bin/bash -m -c "$MY_NAME" $MY_USER
 pacman -S sudo vim --noconfirm
 echo -e "\n%wheel ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
