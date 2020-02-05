@@ -14,10 +14,11 @@ ls -l /boot/efi/EFI/arch/
 ###### SUDO
 useradd -G wheel -s /bin/bash -m -c "$MY_NAME" $MY_USER
 pacman -S sudo vim --noconfirm
-echo -e "\n%wheel ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+echo -e "\n%wheel ALL=(ALL) NOPASSWD: ALL\n" >> /etc/sudoers
 
 ###### BASIC
 pacman -S gnome-desktop gnome-control-center xfce4-terminal gdm networkmanager python3 nautilus chromium git --noconfirm --needed
+echo -e "\nWaylandEnable=false\n" >> /etc/gdm/custom.conf
 systemctl enable gdm NetworkManager.service
 
 ###### LOCALE
@@ -29,6 +30,9 @@ locale-gen
 
 touch /etc/locale.conf
 echo -e "LANG=en_GB.UTF-8" >> /etc/locale.conf
+
+touch /etc/vconsole.conf
+echo -e "KEYMAP=br-abnt2" >> /etc/vconsole.conf
 
 ###### USER
 echo -e "\n$MY_USER password: "
